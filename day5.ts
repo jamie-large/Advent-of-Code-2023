@@ -9,7 +9,7 @@ async function solution_part1() {
     const lr = u.getLineReader();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let STATE = 0;
-    let seeds: number[];
+    let seeds: number[] = [];
     const all_maps: [number, number, number][][] = [[], [], [], [], [], [], []];
     lr.on('line', line => {
         if (!line) {
@@ -27,7 +27,7 @@ async function solution_part1() {
                 return;
             }
             default: {
-                const matches = line.match(/(\d+) (\d+) (\d+)/).slice(1);
+                const matches = line.match(/(\d+) (\d+) (\d+)/)!.slice(1);
                 all_maps[STATE - 1].push([parseInt(matches[1]), parseInt(matches[0]), parseInt(matches[2])]);
                 break;
             }
@@ -90,7 +90,7 @@ async function solution_part2() {
                 return;
             }
             default: {
-                const matches = line.match(/(\d+) (\d+) (\d+)/).slice(1);
+                const matches = line.match(/(\d+) (\d+) (\d+)/)!.slice(1);
                 all_maps[STATE - 1].push([parseInt(matches[1]), parseInt(matches[0]), parseInt(matches[2])]);
                 break;
             }

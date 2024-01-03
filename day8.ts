@@ -24,7 +24,7 @@ async function solution_part1() {
     let location = "AAA";
     let num_steps = 0;
     while (location !== "ZZZ") {
-        location = network.get(location)[instructions[num_steps % instructions.length] === "L" ? 0 : 1];
+        location = network.get(location)![instructions[num_steps % instructions.length] === "L" ? 0 : 1];
         num_steps++;
     }
     return num_steps;
@@ -57,19 +57,19 @@ async function solution_part2() {
         const seen: Map<string, number> = new Map();
         let location = s;
         let num_steps = 0;
-        let offset: number;
+        let offset: number = 0;
         let hash_tuple = [location, num_steps % instructions.length].toString();
         while (seen.get(hash_tuple) === undefined) {
             if (location.at(2) === "Z") {
                 offset = num_steps;
             }
             seen.set(hash_tuple, num_steps);
-            location = network.get(location)[instructions[num_steps % instructions.length] === "L" ? 0 : 1];
+            location = network.get(location)![instructions[num_steps % instructions.length] === "L" ? 0 : 1];
             num_steps++;
             hash_tuple = [location, num_steps % instructions.length].toString();
         }
         offsets.push(offset);
-        cycle_lengths.push(num_steps - seen.get(hash_tuple.toString()));
+        cycle_lengths.push(num_steps - seen.get(hash_tuple.toString())!);
     }
     let result = offsets[0];
     let mod = offsets[0];

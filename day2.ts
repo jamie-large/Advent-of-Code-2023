@@ -22,8 +22,8 @@ async function solution_part1() {
             const colors = s.split(",");
             for (const c of colors) {
                 const words = c.split(" ");
-                const val = parseInt(words.at(-2));
-                if (val > max_map.get(words.at(-1))) {
+                const val = parseInt(words.at(-2)!);
+                if (val > max_map.get(words.at(-1)!)!) {
                     success = false;
                     break loop1;
                 }
@@ -53,9 +53,9 @@ async function solution_part2() {
             const colors = s.split(",");
             for (const c of colors) {
                 const words = c.split(" ");
-                const val = parseInt(words.at(-2));
-                if (val > max_map.get(words.at(-1))) {
-                    max_map.set(words.at(-1), val);
+                const val = parseInt(words.at(-2)!);
+                if (val > max_map.get(words.at(-1)!)!) {
+                    max_map.set(words.at(-1)!, val);
                 }
             }
         }

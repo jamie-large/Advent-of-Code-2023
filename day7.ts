@@ -36,11 +36,11 @@ type Hand = [string, number, string];
 
 function compare_hands(a: Hand, b: Hand) {
     if (a[2] !== b[2]) {
-        return HAND_STRENGTH.get(a[2]) - HAND_STRENGTH.get(b[2]);
+        return HAND_STRENGTH.get(a[2])! - HAND_STRENGTH.get(b[2])!;
     }
     for (let i = 0; i < a[0].length; i++) {
         if (a[0][i] !== b[0][i]) {
-            return CARD_STRENGTH.get(a[0][i]) - CARD_STRENGTH.get(b[0][i]);
+            return CARD_STRENGTH.get(a[0][i])! - CARD_STRENGTH.get(b[0][i])!;
         }
     }
     return 0;
@@ -95,12 +95,12 @@ async function solution_part2() {
         let max_card = "2";
 
         for (const k of hand_map.keys()) {
-            if (hand_map.get(k) > max_val) {
-                max_val = hand_map.get(k);
+            if (hand_map.get(k)! > max_val) {
+                max_val = hand_map.get(k)!;
                 max_card = k;
             }
         }
-        hand_map.set(max_card, hand_map.get(max_card) + num_jokers);
+        hand_map.set(max_card, hand_map.get(max_card)! + num_jokers);
 
         const sorted_values = [...hand_map.values()].sort();
         const type = hand_map.size === 1 ? "5" :

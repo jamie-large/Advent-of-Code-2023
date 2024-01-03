@@ -63,7 +63,7 @@ async function solution_part2() {
             }
             for (const num of NUMBER_MAP.keys()) {
                 if (line.substring(i, i+num.length) === num) {
-                    first_num = NUMBER_MAP.get(num);
+                    first_num = NUMBER_MAP.get(num)!;
                     i = line.length;
                 }
             }
@@ -76,7 +76,7 @@ async function solution_part2() {
             }
             for (const num of NUMBER_MAP.keys()) {
                 if (j + num.length <= line.length && line.substring(j, j+num.length) === num) {
-                    second_num = NUMBER_MAP.get(num);
+                    second_num = NUMBER_MAP.get(num)!;
                     j = -1;
                 }
             }

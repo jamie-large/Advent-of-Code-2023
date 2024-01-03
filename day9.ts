@@ -15,19 +15,19 @@ async function solution_part1() {
         while (!stop) {
             stop = true;
             const new_array: number[] = [];
-            for (let i = 1; i < difference_arrays.at(-1).length; i++) {
-                new_array.push(difference_arrays.at(-1)[i] - difference_arrays.at(-1)[i-1]);
+            for (let i = 1; i < difference_arrays.at(-1)!.length; i++) {
+                new_array.push(difference_arrays.at(-1)![i] - difference_arrays.at(-1)![i-1]);
                 if (new_array.at(-1) !== 0) {
                     stop = false;
                 }
             }
             difference_arrays.push(new_array);
         }
-        difference_arrays.at(-1).push(0);
+        difference_arrays.at(-1)!.push(0);
         for (let i = difference_arrays.length - 2; i >= 0; i--) {
-            difference_arrays[i].push(difference_arrays[i].at(-1) + difference_arrays[i+1].at(-1));
+            difference_arrays[i].push(difference_arrays[i].at(-1)! + difference_arrays[i+1].at(-1)!);
         }
-        result += difference_arrays[0].at(-1);
+        result += difference_arrays[0].at(-1)!;
     });
 
     await u.closeLineReader();
@@ -45,15 +45,15 @@ async function solution_part2() {
         while (!stop) {
             stop = true;
             const new_array: number[] = [];
-            for (let i = 1; i < difference_arrays.at(-1).length; i++) {
-                new_array.push(difference_arrays.at(-1)[i] - difference_arrays.at(-1)[i-1]);
+            for (let i = 1; i < difference_arrays.at(-1)!.length; i++) {
+                new_array.push(difference_arrays.at(-1)![i] - difference_arrays.at(-1)![i-1]);
                 if (new_array.at(-1) !== 0) {
                     stop = false;
                 }
             }
             difference_arrays.push(new_array);
         }
-        difference_arrays.at(-1).push(0);
+        difference_arrays.at(-1)!.push(0);
         for (let i = difference_arrays.length - 2; i >= 0; i--) {
             difference_arrays[i].unshift(difference_arrays[i][0] - difference_arrays[i+1][0]);
         }

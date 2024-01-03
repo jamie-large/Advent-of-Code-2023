@@ -20,7 +20,7 @@ const TRANSITION_MAP = new Map<string, Map<DIR, DIR>>([
 async function solution_part1() {
     const lr = u.getLineReader();
     const grid: string[] = [];
-    let start: [number, number];
+    let start: [number, number] = [0, 0];
     lr.on('line', line => {
         const s = line.search("S");
         if (s >= 0) {
@@ -33,35 +33,35 @@ async function solution_part1() {
     // [r, c], dir, start_dir
     const possible_starts: [[number, number], DIR][] = [];
     // figure out starting locations
-    if (start[0] > 0 && ["|", "F", "7"].includes(grid[start[0] - 1][start[1]]) !== undefined) {
+    if (start[0] > 0 && ["|", "F", "7"].includes(grid[start[0] - 1][start[1]])) {
         possible_starts.push([[start[0] - 1, start[1]], "U"]);
     }
-    if (start[0] < grid.length - 1 && ["|", "L", "J"].includes(grid[start[0] + 1][start[1]]) !== undefined) {
+    if (start[0] < grid.length - 1 && ["|", "L", "J"].includes(grid[start[0] + 1][start[1]])) {
         possible_starts.push([[start[0] + 1, start[1]], "D"]);
     }
-    if (start[1] > 0 && ["-", "F", "L"].includes(grid[start[0]][start[1] - 1]) !== undefined) {
+    if (start[1] > 0 && ["-", "F", "L"].includes(grid[start[0]][start[1] - 1])) {
         possible_starts.push([[start[0], start[1] - 1], "L"]);
     }
-    if (start[1] < grid[start[0]].length - 1 && ["-", "7", "J"].includes(grid[start[0]][start[1] + 1]) !== undefined) {
+    if (start[1] < grid[start[0]].length - 1 && ["-", "7", "J"].includes(grid[start[0]][start[1] + 1])) {
         possible_starts.push([[start[0], start[1] + 1], "R"]);
     }
 
-    let [[r, c], dir] = possible_starts.pop();
+    let [[r, c], dir] = possible_starts.pop()!;
     let distance = 0;
-    while (r === undefined || grid[r][c] !== "S") {
-        if (r === undefined || r < 0 || r >= grid.length || c < 0 || c >= grid[r].length) {
-            r = undefined;
+    while (r === -2 || grid[r][c] !== "S") {
+        if (r === -2 || r < 0 || r >= grid.length || c < 0 || c >= grid[r].length) {
+            r = -2;
         }
-        if (r === undefined) {
+        if (r === -2) {
             distance = 0;
-            [[r, c], dir] = possible_starts.pop();
+            [[r, c], dir] = possible_starts.pop()!;
         }
-        const transition = TRANSITION_MAP.get(grid[r][c]);
+        const transition = TRANSITION_MAP.get(grid[r][c])!;
         if (!transition.has(dir)) {
-            r = undefined;
+            r = -2;
             continue;
         }
-        dir = transition.get(dir);
+        dir = transition.get(dir)!;
         switch (dir) {
             case "U":
                 r--;
@@ -85,7 +85,7 @@ async function solution_part1() {
 async function solution_part2() {
     const lr = u.getLineReader();
     const grid: string[] = [];
-    let start: [number, number];
+    let start: [number, number] = [0, 0];
     lr.on('line', line => {
         const s = line.search("S");
         if (s >= 0) {
@@ -98,37 +98,37 @@ async function solution_part2() {
     // [r, c], dir, start_dir
     const possible_starts: [[number, number], DIR, DIR][] = [];
     // figure out starting locations
-    if (start[0] > 0 && ["|", "F", "7"].includes(grid[start[0] - 1][start[1]]) !== undefined) {
+    if (start[0] > 0 && ["|", "F", "7"].includes(grid[start[0] - 1][start[1]])) {
         possible_starts.push([[start[0] - 1, start[1]], "U", "U"]);
     }
-    if (start[0] < grid.length - 1 && ["|", "L", "J"].includes(grid[start[0] + 1][start[1]]) !== undefined) {
+    if (start[0] < grid.length - 1 && ["|", "L", "J"].includes(grid[start[0] + 1][start[1]])) {
         possible_starts.push([[start[0] + 1, start[1]], "D", "D"]);
     }
-    if (start[1] > 0 && ["-", "F", "L"].includes(grid[start[0]][start[1] - 1]) !== undefined) {
+    if (start[1] > 0 && ["-", "F", "L"].includes(grid[start[0]][start[1] - 1])) {
         possible_starts.push([[start[0], start[1] - 1], "L", "L"]);
     }
-    if (start[1] < grid[start[0]].length - 1 && ["-", "7", "J"].includes(grid[start[0]][start[1] + 1]) !== undefined) {
+    if (start[1] < grid[start[0]].length - 1 && ["-", "7", "J"].includes(grid[start[0]][start[1] + 1])) {
         possible_starts.push([[start[0], start[1] + 1], "R", "R"]);
     }
 
-    let [[r, c], dir, start_dir] = possible_starts.pop();
+    let [[r, c], dir, start_dir] = possible_starts.pop()!;
     const loop_tiles: Set<string> = new Set([start.toString()]);
-    while (r === undefined || grid[r][c] !== "S") {
-        if (r === undefined || r < 0 || r >= grid.length || c < 0 || c >= grid[r].length) {
-            r = undefined;
+    while (r === -2 || grid[r][c] !== "S") {
+        if (r === -2 || r < 0 || r >= grid.length || c < 0 || c >= grid[r].length) {
+            r = -2;
         }
-        if (r === undefined) {
+        if (r === -2) {
             loop_tiles.clear();
             loop_tiles.add(start.toString());
-            [[r, c], dir, start_dir] = possible_starts.pop();
+            [[r, c], dir, start_dir] = possible_starts.pop()!;
         }
         loop_tiles.add([r, c].toString());
-        const transition = TRANSITION_MAP.get(grid[r][c]);
+        const transition = TRANSITION_MAP.get(grid[r][c])!;
         if (!transition.has(dir)) {
-            r = undefined;
+            r = -2;
             continue;
         }
-        dir = transition.get(dir);
+        dir = transition.get(dir)!;
         switch (dir) {
             case "U":
                 r--;
@@ -169,7 +169,7 @@ async function solution_part2() {
     }
 
     while (queue.length > 0) {
-        const [r, c] = queue.pop();
+        const [r, c] = queue.pop()!;
         const rcstring = [r, c].toString();
 
         if (loop_tiles.has(rcstring)) {

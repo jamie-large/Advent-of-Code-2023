@@ -36,7 +36,7 @@ async function solution_part2() {
         const spl = line.split("|");
         const winning_nums = new Set(spl[0].split(/\s+/).slice(2, -1).map(x => parseInt(x)));
         const your_nums = spl[1].split(/\s+/).slice(1).map(x => parseInt(x));
-        cards.push([winning_nums, your_nums])
+        cards.push([winning_nums, your_nums]);
     });
 
     await u.closeLineReader();

@@ -30,7 +30,7 @@ async function solution_part1() {
                 if (!should_be_added) {
                     const neighbors = [[i-1, j-1], [i-1, j], [i-1, j+1], [i, j-1], [i, j+1], [i+1, j-1], [i+1, j], [i+1, j+1]].filter(value => value[0] >= 0 && value[0] <= lines.length - 1 && value[1] >= 0 && value[1] <= line.length - 1);
                     for (const n of neighbors) {
-                        if (isSymbol(lines[n[0]].at(n[1]))) {
+                        if (isSymbol(lines[n[0]].at(n[1])!)) {
                             should_be_added = true;
                             break;
                         }
@@ -83,7 +83,7 @@ async function solution_part2() {
                     if (!gear_locations.has(g)) {
                         gear_locations.set(g, []);
                     }
-                    gear_locations.get(g).push(current_number);
+                    gear_locations.get(g)!.push(current_number);
                 }
                 current_number = 0;
                 gear_targets.clear();
@@ -94,7 +94,7 @@ async function solution_part2() {
             if (!gear_locations.has(g)) {
                 gear_locations.set(g, []);
             }
-            gear_locations.get(g).push(current_number);
+            gear_locations.get(g)!.push(current_number);
         }
     }
 
