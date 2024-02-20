@@ -57,5 +57,6 @@ async function solution_part2() {
     return copies.reduce((prev, current) => prev + current, 0);
 }
 
-solution_part1().then(result => console.log("Part 1 solution:", result));
-solution_part2().then(result => console.log("Part 2 solution:", result));
+let start_time = new Date().getTime();
+solution_part1().then(result => console.log(`Part 1 solution: ${result} in ${new Date().getTime() - start_time} ms`));
+solution_part2().then(result => console.log(`Part 2 solution: ${result} in ${new Date().getTime() - start_time} ms`));

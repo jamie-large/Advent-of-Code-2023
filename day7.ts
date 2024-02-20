@@ -119,6 +119,7 @@ async function solution_part2() {
     }
     return result;
 }
-
-solution_part1().then(result => console.log("Part 1 solution:", result)).then(() => solution_part2().then(result => console.log("Part 2 solution:", result)));
+let start_time = new Date().getTime();
+solution_part1().then(result => console.log(`Part 1 solution: ${result} in ${new Date().getTime() - start_time} ms`))
+    .then(() => solution_part2().then(result => console.log(`Part 2 solution: ${result} in ${new Date().getTime() - start_time} ms`)));
 
